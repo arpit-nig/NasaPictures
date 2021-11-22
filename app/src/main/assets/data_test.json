@@ -1,0 +1,22 @@
+[
+  {
+    "copyright": "test1",
+    "date": "test1",
+    "explanation": "test1",
+    "hdurl": "test1",
+    "media_type": "test1",
+    "service_version": "test1",
+    "title": "test1",
+    "url": "test1"
+  },
+  {
+    "copyright": "test2",
+    "date": "test2",
+    "explanation": "test2",
+    "hdurl": "test2",
+    "media_type": "test2",
+    "service_version": "test2",
+    "title": "test2",
+    "url": "test2"
+  }
+]

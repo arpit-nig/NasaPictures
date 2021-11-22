@@ -1,6 +1,7 @@
 package com.nigamar.nasapictures.domain.dao
 
 interface StorageDao {
-    fun saveDataInStorage(data : String)
+    suspend fun saveDataInStorage(fileName : String)
     fun isFirstLaunch() : Boolean
+    fun updateFirstLaunch( versionCode : Int)
 }
