@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.nigamar.nasapictures.data.data_source.Picture
 import com.nigamar.nasapictures.domain.use_cases.GetAllPictures
 import com.nigamar.nasapictures.domain.use_cases.GetPicturesByDate
+import com.nigamar.nasapictures.ui.event.NasaPictureEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,15 +25,19 @@ class PicturesViewModel @Inject constructor(
         _pictures.postValue(response)
     }
 
-    private fun getPictures() = viewModelScope.launch {
-        val response = getAllPictures()
+    private fun getPictures(pictureId : Int) = viewModelScope.launch {
+        val response = getAllPictures(pictureId)
         pictures.postValue(response)
     }
 
-    fun loadState( state : Int ) {
-        when(state) {
-            1 -> { getPicturesSortedByDate() }
-            2 -> { getPictures() }
+    fun loadState( nasaPicturesEvent: NasaPictureEvent ) {
+        when(nasaPicturesEvent) {
+            NasaPictureEvent.GetPicturesByDate -> {
+                getPicturesSortedByDate()
+            }
+            is NasaPictureEvent.PictureDetailsEvent -> {
+                getPictures(nasaPicturesEvent.pictureId)
+            }
         }
     }
 }

@@ -12,4 +12,7 @@ interface PicturesDao {
 
     @Query("select * from pictures_table")
     suspend fun getAllPictures() : List<Picture>
+
+    @Query("select * from pictures_table where id = :pictureId")
+    suspend fun getPictureById(pictureId: Int): Picture
 }

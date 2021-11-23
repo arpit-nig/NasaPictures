@@ -4,4 +4,5 @@ import com.nigamar.nasapictures.data.data_source.Picture
 
 interface PicturesRepository {
     suspend fun getAllImages() : List<Picture>
+    suspend fun getPictureById(pictureId : Int) : Picture
 }

@@ -25,11 +25,22 @@ class GetPicturesByDateTest {
 
     @Test
     fun shouldReturnSortedListOfPicturesByDate() {
-        val picture1 =
-            Picture("test1", "2020-01-01", "test1", "test1", "test1", "test1", "test1", "test1")
-        val picture2 =
-            Picture("test2", "2021-01-01", "test2", "test2", "test2", "test2", "test2", "test2")
-        val expectedList = listOf(picture2,picture1)
+        val expectedList = mutableListOf<Picture>()
+        for (i in 12 downTo 1){
+            val picture1 = Picture(
+                "test$i",
+                "2020-0$i-0$i",
+                "test$i",
+                "test$i",
+                "test$i",
+                "test$i",
+                "test$i",
+                "test$i"
+            ).apply {
+                id = i
+            }
+            expectedList.add(picture1)
+        }
         runBlockingTest {
             val actualList = getPicturesByDate()
             assertThat(actualList).isEqualTo(expectedList)

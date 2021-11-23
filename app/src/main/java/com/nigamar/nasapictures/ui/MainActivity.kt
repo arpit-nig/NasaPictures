@@ -7,8 +7,11 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nigamar.nasapictures.R
+import com.nigamar.nasapictures.common.Constants
+import com.nigamar.nasapictures.common.Constants.PICTURE_ID
 import com.nigamar.nasapictures.data.data_source.Picture
 import com.nigamar.nasapictures.ui.adapter.PicturesAdapter
+import com.nigamar.nasapictures.ui.event.NasaPictureEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -23,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initView()
-        picturesViewModel.loadState(1)
+        picturesViewModel.loadState(NasaPictureEvent.GetPicturesByDate)
         observeChanges()
         listenForClickEvents()
     }
@@ -36,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun launchDetailsActivity(picture: Picture) {
         Intent(this,PictureDetails::class.java).apply {
-            putExtra("picture_id",picture.id)
+            putExtra(PICTURE_ID,picture.id)
             startActivity(this)
         }
     }

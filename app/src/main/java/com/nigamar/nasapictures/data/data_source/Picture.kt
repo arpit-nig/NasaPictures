@@ -17,3 +17,11 @@ data class Picture(
     @PrimaryKey(autoGenerate = true)
     var id : Int = 0
 }
+
+class ComparePictures {
+    companion object : Comparator<Picture> {
+        override fun compare(p1: Picture, p2: Picture): Int {
+            return (p1.id - p2.id)
+        }
+    }
+}

@@ -5,6 +5,8 @@ import android.content.Context.MODE_PRIVATE
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.nigamar.nasapictures.common.Constants.DOES_NOT_EXIST
+import com.nigamar.nasapictures.common.Constants.FIRST_LAUNCH
+import com.nigamar.nasapictures.common.Constants.PREF_FILE_NAME
 import com.nigamar.nasapictures.data.data_source.Picture
 import com.nigamar.nasapictures.data.data_source.PicturesDao
 import com.nigamar.nasapictures.domain.dao.StorageDao
@@ -16,7 +18,7 @@ class StorageDaoImpl constructor(
 ) : StorageDao {
 
     private val preferences by lazy {
-        context.getSharedPreferences("pictures_pref",MODE_PRIVATE)
+        context.getSharedPreferences(PREF_FILE_NAME,MODE_PRIVATE)
     }
 
     private val assetManager by lazy {
@@ -37,10 +39,10 @@ class StorageDaoImpl constructor(
     }
 
     override fun isFirstLaunch(): Boolean {
-        return preferences.getInt("first_launch",DOES_NOT_EXIST) == DOES_NOT_EXIST
+        return preferences.getInt(FIRST_LAUNCH,DOES_NOT_EXIST) == DOES_NOT_EXIST
     }
 
     override fun updateFirstLaunch(versionCode: Int) {
-        preferences.edit().putInt("first_launch",versionCode).apply()
+        preferences.edit().putInt(FIRST_LAUNCH,versionCode).apply()
     }
 }

@@ -1,7 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/picture_container"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+            android:id="@+id/picture"
+            android:scaleType="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/details_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true"
+        android:layout_below="@id/picture_container"
+        >
+        <RelativeLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/title"
+                android:text="Spiral Galaxy NGC 6744"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="sans-serif-black"
+                android:textSize="20sp"
+                android:layout_margin="5dp"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:id="@+id/copyright"
+                android:text="-- Zhuokai Liu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/title"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-medium"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                />
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_below="@id/copyright"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/explanation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:textSize="14sp"
+                    android:textAlignment="textStart"
+                    android:text="@string/dummy_explanation"
+                    android:textColor="@color/black"
+                    />
+
+            </androidx.core.widget.NestedScrollView>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

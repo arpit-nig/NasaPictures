@@ -19,4 +19,8 @@ class PicturesRepoImpl(
         }
         return picturesDao.getAllPictures()
     }
+
+    override suspend fun getPictureById(pictureId: Int): Picture {
+        return picturesDao.getPictureById(pictureId)
+    }
 }

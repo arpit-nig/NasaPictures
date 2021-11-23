@@ -12,9 +12,10 @@ class GetPicturesByDate constructor(
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
     suspend operator fun invoke(): List<Picture> {
-        return picturesRepository.getAllImages().sortedByDescending {
-            val date = dateFormat.parse(it.date)
-            date.time
-        }
+        return picturesRepository.getAllImages()
+            .sortedByDescending {
+                val date = dateFormat.parse(it.date)
+                date.time
+            }
     }
 }

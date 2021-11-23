@@ -25,14 +25,36 @@ class GetAllPicturesTest {
 
     @Test
     fun shouldReturnSortedListOfUrlsByDate() {
-        val picture1 =
-            Picture("test1", "2020-01-01", "test1", "test1", "test1", "test1", "test1", "test1")
-        val picture2 =
-            Picture("test2", "2021-01-01", "test2", "test2", "test2", "test2", "test2", "test2")
-        val expectedList = listOf(picture1,picture2)
+        val expectedList = mutableListOf<Picture>()
+        val picture = Picture("test7", "2020-07-07", "test7", "test7", "test7", "test7", "test7", "test7").apply {
+            id = 7
+        }
+        expectedList.add(picture)
+        for (i in 2..12){
+            if (i != 7){
+                val picture1 = Picture(
+                    "test$i",
+                    "2020-0$i-0$i",
+                    "test$i",
+                    "test$i",
+                    "test$i",
+                    "test$i",
+                    "test$i",
+                    "test$i"
+                ).apply {
+                    id = i
+                }
+                expectedList.add(picture1)
+            } else {
+                val picture2 = Picture("test1", "2020-01-01", "test1", "test1", "test1", "test1", "test1", "test1").apply {
+                    id = 1
+                }
+                expectedList.add(picture2)
+            }
+        }
 
         runBlockingTest {
-            val actualList = getAllPictures()
+            val actualList = getAllPictures(7)
             Truth.assertThat(actualList).isEqualTo(expectedList)
         }
     }

@@ -10,9 +10,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.nigamar.nasapictures.R
 import com.nigamar.nasapictures.data.data_source.Picture
-import kotlinx.android.synthetic.main.picture_item.view.*
+import kotlinx.android.synthetic.main.picture_details_item.view.*
 
-class PicturesAdapter : RecyclerView.Adapter<PicturesAdapter.PicturesViewHolder>() {
+class PictureDetailsAdapter : RecyclerView.Adapter<PictureDetailsAdapter.PagerViewHolder>() {
 
     private val differCallback = object : DiffUtil.ItemCallback<Picture>() {
 
@@ -27,35 +27,33 @@ class PicturesAdapter : RecyclerView.Adapter<PicturesAdapter.PicturesViewHolder>
 
     val differ = AsyncListDiffer(this, differCallback)
 
-    private var pictureClickListener: ((Picture) -> Unit)? = null
-
-    fun getPictureAtPosition(listener: (Picture) -> Unit) {
-        pictureClickListener = listener
-    }
-
-    inner class PicturesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class PagerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindData(picture: Picture) {
-            // use glide to load the image
             Glide.with(itemView)
-                .load(picture.url)
+                .load(picture.hdurl)
                 .placeholder(R.drawable.moon_animated)
-                .into(itemView.picture_view)
-            // set the on click listener on the image
-            itemView.setOnClickListener {
-                pictureClickListener?.let {
-                    it(picture)
-                }
+                .into(itemView.picture)
+            itemView.apply {
+                title.text = picture.title
+                copyright.text = picture.copyright?.let {
+                    "-- $it"
+                } ?: "-- Unknown"
+                explanation.text = picture.explanation
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PicturesViewHolder {
-        return PicturesViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.picture_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerViewHolder {
+        return PagerViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.picture_details_item,
+                parent,
+                false
+            )
         )
     }
 
-    override fun onBindViewHolder(holder: PicturesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
         val picture = differ.currentList[position]
         holder.bindData(picture)
     }
