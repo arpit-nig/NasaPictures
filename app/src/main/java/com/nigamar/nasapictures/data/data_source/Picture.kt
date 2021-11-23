@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "pictures_table")
 data class Picture(
-    val copyright: String,
+    var copyright: String?,
     val date: String,
     val explanation: String,
     val hdurl: String,
